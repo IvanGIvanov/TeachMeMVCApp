@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TeeachMeMVCWebApp.Data;
 
 namespace TeeachMeMVCWebApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220125215019_EditIdentityFieldsStringLength")]
+    partial class EditIdentityFieldsStringLength
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -154,130 +156,6 @@ namespace TeeachMeMVCWebApp.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("TeachMeMVCApp.Entities.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ThumbnailImagePath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("TeachMeMVCApp.Entities.CategoryItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DateTimeItemReleased")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("MediaTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.HasIndex("MediaTypeId");
-
-                    b.ToTable("CategoryItems");
-                });
-
-            modelBuilder.Entity("TeachMeMVCApp.Entities.Content", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("CategoryItemId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("HTMLContent")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("VideoLink")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryItemId");
-
-                    b.ToTable("Contents");
-                });
-
-            modelBuilder.Entity("TeachMeMVCApp.Entities.MediaType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ThumbnailImagePath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("MediaTypes");
-                });
-
-            modelBuilder.Entity("TeachMeMVCApp.Entities.UserCategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserCategories");
-                });
-
             modelBuilder.Entity("TeeachMeMVCWebApp.Data.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -408,60 +286,6 @@ namespace TeeachMeMVCWebApp.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("TeachMeMVCApp.Entities.CategoryItem", b =>
-                {
-                    b.HasOne("TeachMeMVCApp.Entities.Category", null)
-                        .WithMany("CategoryItems")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TeachMeMVCApp.Entities.MediaType", null)
-                        .WithMany("CategoryItems")
-                        .HasForeignKey("MediaTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("TeachMeMVCApp.Entities.Content", b =>
-                {
-                    b.HasOne("TeachMeMVCApp.Entities.CategoryItem", "CategoryItem")
-                        .WithMany()
-                        .HasForeignKey("CategoryItemId");
-
-                    b.Navigation("CategoryItem");
-                });
-
-            modelBuilder.Entity("TeachMeMVCApp.Entities.UserCategory", b =>
-                {
-                    b.HasOne("TeachMeMVCApp.Entities.Category", null)
-                        .WithMany("UserCategory")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TeeachMeMVCWebApp.Data.ApplicationUser", null)
-                        .WithMany("UserCategory")
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("TeachMeMVCApp.Entities.Category", b =>
-                {
-                    b.Navigation("CategoryItems");
-
-                    b.Navigation("UserCategory");
-                });
-
-            modelBuilder.Entity("TeachMeMVCApp.Entities.MediaType", b =>
-                {
-                    b.Navigation("CategoryItems");
-                });
-
-            modelBuilder.Entity("TeeachMeMVCWebApp.Data.ApplicationUser", b =>
-                {
-                    b.Navigation("UserCategory");
                 });
 #pragma warning restore 612, 618
         }
