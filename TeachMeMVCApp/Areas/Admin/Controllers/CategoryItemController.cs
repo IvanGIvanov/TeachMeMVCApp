@@ -25,6 +25,10 @@ namespace TeachMeMVCApp.Areas.Admin.Controllers
         public async Task<IActionResult> Index(int categoryId)
         {
             List<CategoryItem> list = await (from catItem in _context.CategoryItems
+                                             join contentItem in _context.Contents
+                                             on catItem.Id equals contentItem.CategoryItem.Id
+                                             into gj
+                                             from subContent in gj.DefaultIfEmpty()
                                              where catItem.CategoryId == categoryId
                                              select new CategoryItem
                                              {
@@ -33,7 +37,8 @@ namespace TeachMeMVCApp.Areas.Admin.Controllers
                                                  Description = catItem.Description,
                                                  DateTimeItemReleased = catItem.DateTimeItemReleased,
                                                  MediaTypeId = catItem.MediaTypeId,
-                                                 CategoryId = categoryId
+                                                 CategoryId = categoryId,
+                                                 ContentId = (subContent != null) ? subContent.Id : 0
                                              }).ToListAsync();
 
             ViewBag.CategoryId = categoryId;
@@ -97,11 +102,16 @@ namespace TeachMeMVCApp.Areas.Admin.Controllers
                 return NotFound();
             }
 
+            List<MediaType> mediaTypes = await _context.MediaTypes.ToListAsync();
+
             var categoryItem = await _context.CategoryItems.FindAsync(id);
             if (categoryItem == null)
             {
                 return NotFound();
             }
+
+            categoryItem.MediaTypes = mediaTypes.ConvertToSelectList(categoryItem.MediaTypeId);
+
             return View(categoryItem);
         }
 
@@ -135,7 +145,7 @@ namespace TeachMeMVCApp.Areas.Admin.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { categoryId = categoryItem.CategoryId });
             }
             return View(categoryItem);
         }
@@ -166,7 +176,7 @@ namespace TeachMeMVCApp.Areas.Admin.Controllers
             var categoryItem = await _context.CategoryItems.FindAsync(id);
             _context.CategoryItems.Remove(categoryItem);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), new { categoryId = categoryItem.CategoryId });
         }
 
         private bool CategoryItemExists(int id)

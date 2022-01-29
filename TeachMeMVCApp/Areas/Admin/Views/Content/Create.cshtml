@@ -1,4 +1,4 @@
-﻿@model TeachMeMVCApp.Entities.CategoryItem
+﻿@model TeachMeMVCApp.Entities.Content
 
 @{
     ViewData["Title"] = "Create";
@@ -6,13 +6,13 @@
 
 <h1>Create</h1>
 
-<h4>CategoryItem</h4>
+<h4>Content</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <input type="hidden" asp-for="CategoryId" />
-
+            <input type="hidden" asp-for="CatItemId" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
@@ -20,20 +20,14 @@
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
+                <label asp-for="HTMLContent" class="control-label"></label>
+                <input asp-for="HTMLContent" class="form-control" />
+                <span asp-validation-for="HTMLContent" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="MediaTypeId" class="control-label"></label>
-                <select asp-for="MediaTypeId" class="form-control" asp-items="@Model.MediaTypes">
-                    <option value="">--- Please Select Media Type ---</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateTimeItemReleased" class="control-label"></label>
-                <input asp-for="DateTimeItemReleased" class="form-control" />
-                <span asp-validation-for="DateTimeItemReleased" class="text-danger"></span>
+                <label asp-for="VideoLink" class="control-label"></label>
+                <input asp-for="VideoLink" class="form-control" />
+                <span asp-validation-for="VideoLink" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
