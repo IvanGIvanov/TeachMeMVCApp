@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TeachMeMVCApp.Entities;
 using TeeachMeMVCWebApp.Data;
+using TeachMeMVCApp.Extensions;
 
 namespace TeachMeMVCApp.Areas.Admin.Controllers
 {
@@ -35,6 +36,8 @@ namespace TeachMeMVCApp.Areas.Admin.Controllers
                                                  CategoryId = categoryId
                                              }).ToListAsync();
 
+            ViewBag.CategoryId = categoryId;
+
             return View(list);
         }
 
@@ -57,9 +60,17 @@ namespace TeachMeMVCApp.Areas.Admin.Controllers
         }
 
         // GET: Admin/CategoryItem/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create(int categoryId)
         {
-            return View();
+            List<MediaType> mediaTypes = await _context.MediaTypes.ToListAsync();
+
+            CategoryItem categoryItem = new CategoryItem
+            {
+                CategoryId = categoryId,
+                MediaTypes = mediaTypes.ConvertToSelectList(0)
+            };
+
+            return View(categoryItem);
         }
 
         // POST: Admin/CategoryItem/Create
@@ -73,7 +84,7 @@ namespace TeachMeMVCApp.Areas.Admin.Controllers
             {
                 _context.Add(categoryItem);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { categoryId = categoryItem.CategoryId });
             }
             return View(categoryItem);
         }
