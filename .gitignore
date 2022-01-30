@@ -348,3 +348,5 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+/TeachMeMVCApp/Data/Migrations
+/TeachMeMVCApp/wwwroot/images
