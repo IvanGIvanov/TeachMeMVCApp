@@ -21,12 +21,15 @@ namespace TeachMeMVCApp.Entities
 
         public int CategoryId { get; set; }
 
+        [Required(ErrorMessage = "Please select valid '{0}' from list!")]
+        [Display(Name = "Media type")]
         public int MediaTypeId { get; set; }
 
         [NotMapped]
         public virtual ICollection<SelectListItem> MediaTypes { get; set; }
 
         [DisplayFormat(DataFormatString ="{0:yyyy-MM-dd}")]
+        [Display(Name = "Release date")]
         public DateTime DateTimeItemReleased 
         {
             get

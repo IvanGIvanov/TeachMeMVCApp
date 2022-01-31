@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,10 +11,16 @@ namespace TeachMeMVCApp.Entities
     {
         public int Id { get; set; }
 
+        [Required(ErrorMessage = "This field is required!")]
+        [StringLength(100, MinimumLength = 2)]
         public string Title { get; set; }
 
+        [Required(ErrorMessage = "This field is required!")]
+        [Display(Name = "HTML content")]
         public string HTMLContent { get; set; }
 
+        [Required(ErrorMessage = "This field is required!")]
+        [Display(Name = "Video link")]
         public string VideoLink { get; set; }
 
         public CategoryItem CategoryItem { get; set; }

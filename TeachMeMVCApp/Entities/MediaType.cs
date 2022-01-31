@@ -17,6 +17,7 @@ namespace TeachMeMVCApp.Entities
         public string Title { get; set; }
 
         [Required]
+        [Display(Name = "Thumbnail path")]
         public string ThumbnailImagePath { get; set; }
 
         [ForeignKey("MediaTypeId")]

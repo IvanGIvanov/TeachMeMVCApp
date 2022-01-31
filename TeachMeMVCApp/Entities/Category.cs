@@ -11,14 +11,15 @@ namespace TeachMeMVCApp.Entities
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "This field is required!")]
         [StringLength(100, MinimumLength = 2)]
         public string Title { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please add description!")]
         public string Description { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "This field is required!")]
+        [Display(Name = "Thumbnail Path")]
         public string ThumbnailImagePath { get; set; }
 
         [ForeignKey("CategoryId")]
