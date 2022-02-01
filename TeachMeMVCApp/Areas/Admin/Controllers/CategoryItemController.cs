@@ -8,10 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using TeachMeMVCApp.Entities;
 using TeeachMeMVCWebApp.Data;
 using TeachMeMVCApp.Extensions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TeachMeMVCApp.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class CategoryItemController : Controller
     {
         private readonly ApplicationDbContext _context;
