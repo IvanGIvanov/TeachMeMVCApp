@@ -1,14 +1,12 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using TeachMeMVCApp.Entities;
-using TeeachMeMVCWebApp.Data;
 using TeachMeMVCApp.Extensions;
-using Microsoft.AspNetCore.Authorization;
+using TeeachMeMVCWebApp.Data;
 
 namespace TeachMeMVCApp.Areas.Admin.Controllers
 {
