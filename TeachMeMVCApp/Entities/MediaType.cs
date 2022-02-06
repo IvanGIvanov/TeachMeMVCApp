@@ -5,15 +5,18 @@ using TeachMeMVCApp.Interfaces;
 
 namespace TeachMeMVCApp.Entities
 {
+    using static TeachMeMVCApp.Data.Constants.Common;
+    using static TeachMeMVCApp.Data.Constants.Title;
+
     public class MediaType : IPrimaryProperties
     {
         public int Id { get; set; }
 
-        [Required]
-        [StringLength(100, MinimumLength = 2)]
+        [Required(ErrorMessage = requiredFieldMessage)]
+        [StringLength(maxTitleLength, MinimumLength = minTitleLength)]
         public string Title { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = requiredFieldMessage)]
         [Display(Name = "Thumbnail path")]
         public string ThumbnailImagePath { get; set; }
 

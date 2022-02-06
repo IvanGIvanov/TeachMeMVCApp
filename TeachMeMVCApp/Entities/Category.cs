@@ -4,8 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TeachMeMVCApp.Entities
 {
-    using static TeachMeMVCApp.Data.DataConstants.Common;
-    using static TeachMeMVCApp.Data.DataConstants.Title;
+    using static TeachMeMVCApp.Data.Constants.Common;
+    using static TeachMeMVCApp.Data.Constants.Title;
+    using static TeachMeMVCApp.Data.Constants.Description;
     public class Category
     {
         public int Id { get; set; }
@@ -14,7 +15,8 @@ namespace TeachMeMVCApp.Entities
         [StringLength(maxTitleLength, MinimumLength = minTitleLength)]
         public string Title { get; set; }
 
-        [Required(ErrorMessage = "Please add description!")]
+        [Required(ErrorMessage = requiredFieldMessage)]
+        [StringLength(maxDescriptionLength, MinimumLength = minDescriptionLength)]
         public string Description { get; set; }
 
         [Required(ErrorMessage = requiredFieldMessage)]

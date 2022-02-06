@@ -6,27 +6,34 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TeachMeMVCApp.Entities
 {
+    using static TeachMeMVCApp.Data.Constants.Common;
+    using static TeachMeMVCApp.Data.Constants.Title;
+    using static TeachMeMVCApp.Data.Constants.Description;
+    using static TeachMeMVCApp.Data.Constants.DateFormat;
+
     public class CategoryItem
     {
         private DateTime _releaseDate = DateTime.MinValue;
         public int Id { get; set; }
 
-        [Required]
-        [StringLength(100, MinimumLength = 2)]
+        [Required(ErrorMessage = requiredFieldMessage)]
+        [StringLength(maxTitleLength, MinimumLength = minTitleLength)]
         public string Title { get; set; }
 
+        [Required(ErrorMessage = requiredFieldMessage)]
+        [StringLength(maxDescriptionLength, MinimumLength = minDescriptionLength)]
         public string Description { get; set; }
 
         public int CategoryId { get; set; }
 
-        [Required(ErrorMessage = "Please select valid '{0}' from list!")]
+        [Required(ErrorMessage = requiredDropDownMessage)]
         [Display(Name = "Media type")]
         public int MediaTypeId { get; set; }
 
         [NotMapped]
         public virtual ICollection<SelectListItem> MediaTypes { get; set; }
 
-        [DisplayFormat(DataFormatString ="{0:yyyy-MM-dd}")]
+        [DisplayFormat(DataFormatString = dateFormat)]
         [Display(Name = "Release date")]
         public DateTime DateTimeItemReleased 
         {

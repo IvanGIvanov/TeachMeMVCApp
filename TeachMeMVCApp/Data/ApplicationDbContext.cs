@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 using TeachMeMVCApp.Entities;
 
 namespace TeeachMeMVCWebApp.Data
@@ -35,6 +33,7 @@ namespace TeeachMeMVCWebApp.Data
         }
 
         public DbSet<Category> Categories { get; set; }
+
         public DbSet<CategoryItem> CategoryItems { get; set; }
 
         public DbSet<Content> Contents { get; set; }

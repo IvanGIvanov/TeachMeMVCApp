@@ -3,19 +3,22 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TeachMeMVCApp.Entities
 {
+    using static TeachMeMVCApp.Data.Constants.Common;
+    using static TeachMeMVCApp.Data.Constants.Title;
+
     public class Content
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "This field is required!")]
-        [StringLength(100, MinimumLength = 2)]
+        [Required(ErrorMessage = requiredFieldMessage)]
+        [StringLength(maxTitleLength, MinimumLength = minTitleLength)]
         public string Title { get; set; }
 
-        [Required(ErrorMessage = "This field is required!")]
+        [Required(ErrorMessage = requiredFieldMessage)]
         [Display(Name = "HTML content")]
         public string HTMLContent { get; set; }
 
-        [Required(ErrorMessage = "This field is required!")]
+        [Required(ErrorMessage = requiredFieldMessage)]
         [Display(Name = "Video link")]
         public string VideoLink { get; set; }
 

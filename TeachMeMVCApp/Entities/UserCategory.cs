@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace TeachMeMVCApp.Entities
+﻿namespace TeachMeMVCApp.Entities
 {
     public class UserCategory
     {
