@@ -17,7 +17,7 @@ namespace TeachMeMVCApp.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = requiredFieldMessage)]
-        [StringLength(maxPasswordLength, MinimumLength = maxPasswordLength)]
+        [StringLength(maxPasswordLength, MinimumLength = minPasswordLength)]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 

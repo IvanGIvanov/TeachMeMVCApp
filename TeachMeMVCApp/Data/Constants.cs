@@ -32,5 +32,11 @@
             public const int minPasswordLength = 6;
             public const int maxPasswordLength = 256;
         }
+
+        public class Register
+        {
+            public const int minNameLength = 2;
+            public const int maxNameLength = 30;
+        }
     }
 }
