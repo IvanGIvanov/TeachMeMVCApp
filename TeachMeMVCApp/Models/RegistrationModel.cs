@@ -40,11 +40,11 @@ namespace TeachMeMVCApp.Models
         public string Address { get; set; }
 
         [Required]
-        [RegularExpression("^\\d{4}$")]
+        //[RegularExpression("^\\d{4}$")]
         public string PostCode { get; set; }
 
         [Required]
-        [RegularExpression(@"/08[789]\d{7}/")]
+        //[RegularExpression(@"/08[789]\d{7}/")]
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
 
